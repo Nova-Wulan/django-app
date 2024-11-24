@@ -1,0 +1,80 @@
+{% extends 'base.html' %} 
+{% block title %}{{ project.title }}{% endblock %} 
+{% block content %}
+<div class="container mt-4">
+  <!-- Project Details -->
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm rounded">
+        <div class="card-body">
+          <div class="d-flex justify-content-center">
+            <img
+              src="{{ project.image.url }}"
+              alt="{{ project.title }}"
+              class="img-fluid rounded mb-3"
+              style="max-height: 300px; object-fit: cover; width: 100%;"
+            />
+          </div>
+          <h2 class="card-title">{{ project.title }}</h2>
+          <p class="card-text">{{ project.description }}</p>
+          <p><strong>Average Rating:</strong> {{ average_rating }} / 5</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error or Success Messages -->
+  {% if error %}
+    <div class="alert alert-danger mt-4">{{ error }}</div>
+  {% elif success %}
+    <div class="alert alert-success mt-4">{{ success }}</div>
+  {% endif %}
+
+  <!-- Rating Form -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_name" class="form-label">Nama Anda</label>
+          <input type="text" name="nama" id="id_name" class="form-control" required>
+        </div>
+        <div class="form-group mt-3">
+          <label for="rating" class="form-label">Rating</label>
+          <select name="rating" id="rating" class="form-control" required>
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+          </select>
+        </div>
+        <div class="form-group mt-3">
+          <label for="id_caption" class="form-label">Keterangan</label>
+          <textarea name="caption" id="id_caption" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit Rating</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="container mt-5">
+    <h4 class="mb-4">Reviews</h4>
+    {% if reviews %}
+      {% for review in reviews %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ review.name }}</h5>
+            <p class="card-text"><strong>Comment:</strong> {{ review.caption }}</p>
+            <p class="card-text"><strong>Date:</strong> {{ review.created_at|date:"d M Y H:i" }}</p>
+            <p class="card-text"><strong>Rating:</strong> {{ review.rating }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-muted">No reviews yet. Be the first to leave a review!</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+{% load static %}
+<section class="about-section">
+    <div class="container">
+        <h1>About Me</h1>
+        <p class="lead">Welcome to my portfolio! I am a passionate developer who loves building innovative projects.</p>
+    </div>
+</section>
+<section class="content">
+    <div class="container">
+        <h2 class="text-center">Who Am I?</h2>
+        <p class="text-center mb-4">I am a developer specializing in web applications, with a strong focus on Django and front-end development. I enjoy solving problems and creating impactful solutions.</p>
+        
+        <div class="row text-center">
+            <div class="col-md-4">
+                <img src="{% static 'images/ngoding.jpeg' %}" alt="Profile 1" class="img-fluid mb-3">
+                <h5>Web Permormance Optimazation</h5>
+                <p>Reducing page load time using Django's static files system and efficient front-end practices.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'images/git.png' %}" alt="Profile 2" class="img-fluid mb-3">
+                <h5>Version Control with Git</h5>
+                <p>Managing Django projects and colaborating using Git with front-end and back-end components.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'images/teamworking.jpeg' %}" alt="Profile 3" class="img-fluid mb-3">
+                <h5>Communication and Teamwork</h5>
+                <p>Ability to collaborate effectively with designers, back-end developer, and stakeholders</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
